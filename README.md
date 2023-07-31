@@ -1,5 +1,9 @@
-# atliq hardware data exploration
-top market by net sales
+# Atliq hardware data exploration
+
+#ERD(Entity relationship diagram) 
+![image](https://github.com/bala942/atliq_hardware/assets/127521506/6ec0ba34-05fd-4ac0-80f4-25119ed950ee)
+
+1.top market by net sales
 
 ```sql
 SELECT market,
@@ -23,8 +27,10 @@ ORDER BY total_gross_price desc
 ```
 ![image](https://github.com/bala942/atliq_hardware/assets/127521506/6c821135-731e-47f5-8a28-c44d14d20c19)
 
-supply chain analytics using CTE
-
+2.supply chain analytics using CTE
+* net error
+* absolute error
+* forecast accuracy 
 
 ```sql
 WITH total_qnt AS (
@@ -53,8 +59,24 @@ ORDER BY forecast_accuracy_neterror DESC;
 ```
 ![image](https://github.com/bala942/atliq_hardware/assets/127521506/f83c9887-714a-40ad-9dc9-0c9565e20dfa)
 
+3.Top markets in specific region by gross sales(using window function)
 
+```sql
+WITH 
+gross_total_market_region AS
+(
+SELECT market,region,ROUND(SUM(gross_price_total)/1000000,1) AS gross_sales_mln FROM gross_sales
+where fiscal_year=2021
+GROUP BY market,region),
+rank_1 AS 
+(
+SELECT *,ROW_NUMBER() OVER(PARTITION BY region ORDER BY gross_sales_mln desc) AS rank_
+FROM gross_total_market_region)
+SELECT * FROM rank_1
+WHERE rank_ IN(1,2,3)
+```
 
+![image](https://github.com/bala942/atliq_hardware/assets/127521506/1bf0123f-0978-4bd2-9574-f625fb33222a)
 
 
 
