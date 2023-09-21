@@ -78,6 +78,11 @@ WHERE rank_ IN(1,2,3)
 
 ![image](https://github.com/bala942/atliq_hardware/assets/127521506/1bf0123f-0978-4bd2-9574-f625fb33222a)
 
+#power bi dashboard for indian market
+
+![Screenshot 2023-09-21 231557](https://github.com/bala942/atliq_hardware/assets/127521506/7a0f09ab-4968-4adb-9204-0a11abdb175d)
+
+
 
 
 
